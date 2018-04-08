@@ -1,0 +1,10 @@
+node_modules/
+npm-debug.log
+build/
+.vscode
+.idea/
+test.js
+/app/components/admin/Main/Main-bk0323.jsx
+/app/components/admin/Sidebar/Sidebar-bk0323.jsx
+/app/config/constants-bk0323.js
+/app-bk

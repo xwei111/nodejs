@@ -1,0 +1,35 @@
+1.启动 net start MongoDB
+2.停止 net stop MongoDB
+3.链接 mongo
+4.查看所有数据库 show dbs(databases)
+5.切换到某个数据库 use col
+6.新建数据库  首先创建并切换到该数据库（use col），插入数据（db.col.insert({'sex':'女'})只有插入数据该数据库才会显示）
+7.删除数据库  首先切换到该数据库（use col）,然后（db.dropDatabase()）;
+8.删除集合  db.col.drop()
+9.插入文档  db.col.insert({title: 'MongoDB 教程', 
+							    description: 'MongoDB 是一个 Nosql 数据库',
+							    by: '菜鸟教程',
+							    url: 'http://www.runoob.com',
+							    tags: ['mongodb', 'database', 'NoSQL'],
+							    likes: 100
+							})
+10.更新文档 db.col.update({'title':'MongoDB 教程'},{$set:{'title':'MongoDB'}})//将title为'MongoDB 教程'替换为'MongoDB'
+
+			db.col.save({//替换ID为56064f89ade2f21f36b03136的数据
+			    "_id" : ObjectId("56064f89ade2f21f36b03136"),
+			    "title" : "MongoDdddbbbB",
+			    "description" : "MongoDB 是一个 Nosql 数据库",
+			    "by" : "Runoob",
+			    "url" : "http://www.runoob.com",
+			    "tags" : [
+			            "mongodb",
+			            "NoSQL"
+			    ],
+			    "likes" : 110
+			})
+
+11.查询文档	db.col.find()  db.col.find().pretty()  除了 find() 方法之外，还有一个 findOne() 方法，它只返回一个文档。
+
+
+
+
