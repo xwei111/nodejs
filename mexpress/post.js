@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+<<<<<<< HEAD
 const path = require('path');
 
 const a=1;
@@ -45,6 +46,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+=======
+ 
+// 创建 application/x-www-form-urlencoded 编码解析
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
+ 
+app.use(express.static('public'));
+ 
+>>>>>>> bf37c13d8e2f1b6754f3e33b78a54beed31fbaff
 app.get('/index1.html', function (req, res) {
    res.sendFile( __dirname + "/" + "index1.html" );
 })

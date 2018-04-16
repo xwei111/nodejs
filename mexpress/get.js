@@ -1,7 +1,11 @@
 var express = require('express');
 var app = express();
  
+<<<<<<< HEAD
 app.use(express.static('../public'));
+=======
+app.use(express.static('public'));
+>>>>>>> bf37c13d8e2f1b6754f3e33b78a54beed31fbaff
  
 app.get('/index.html', function (req, res) {
    res.sendFile( __dirname + "/" + "index.html" );
