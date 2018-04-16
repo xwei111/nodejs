@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src='/js/jquery.min.js'></script>
+    <style>
+      .bor{
+        border: 1px solid #eee;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div class="bor info">
+    </div>
+    
+    <div class="post">
+      <input type="text" class="user" placeholder="user">
+      <input type="text" class="pwd" placeholder="pwd">
+      <button class="login">login</button>
+    </div>
+    <br/>
+    <div class="get">
+      <input type="text" class="user1" placeholder="user">
+      <input type="text" class="limit1" placeholder="limit">
+      <input type="text" class="count1" placeholder="count">
+      <input type='text' class='token1' placeholder='token'>
+      <button class="search">search</button>
+    </div>
+    <br/>
+    <div class="post">
+      <input type="text" class="user2" placeholder="user">
+      <input type="text" class="title2" placeholder="title">
+      <input type="text" class="content2" placeholder="content">
+      <input type='text' class='token2' placeholder='token'>
+      <button class="insert">insert</button>
+    </div>
+    <br/>
+    <div class="get">
+      <input type="text" class="user3" placeholder="user">
+      <input type='text' class='token3' placeholder='token'>
+      <button class="delete">delete</button>
+    </div>
+    <br/>
+    <div class="put">
+      <input type="text" class="user4" placeholder="user">
+      <input type='text' class='title4' placeholder='title'>
+      <input type='text' class='token4' placeholder='token'>
+      <button class="update">update</button>
+    </div>
+    <br/>
+    <div>图片上传：<input type="file" name="fileToUpload" id="fileToUpload" class="fileupload" /></div>
+    <img style="width: 100px;" src="" />
+    
+  </body>
+  <script type="text/javascript">
+      // 登录
+      $('.login').click(function() {
+        $.ajax({
+          type: 'post',
+          url: '/api/login',
+          data: {
+            user: $('.user').val(),
+            pwd: $('.pwd').val()
+          },
+          success: function (data) {
+            console.log('----login', data)
+            alert(data.message)
+          }
+        })
+      })
+      // 查询
+      $('.search').click(()=>{
+        $.get('/api/searchArticle', {'token':$('.token1').val(),'user':$('.user1').val(),'limit':$('.limit1').val(),'count':$('.count1').val()}, function (data) {
+          console.log('----userinfo:', data)
+        })
+      })
+      // 插入
+      $('.insert').click(function() {
+        $.ajax({
+          type: 'post',
+          url: '/api/insertArticle',
+          data: {
+            user: $('.user2').val(),
+            title: $('.title2').val(),
+            content: $('.content2').val(),
+            token: $('.token2').val(),
+          },
+          success: function (data) {
+            console.log('----insert', data)
+            
+          }
+        })
+      })
+      // 删除
+      $('.delete').click(()=>{
+           $.ajax({
+             type:'delete',
+             url:'/api/deleteArticle?user='+$('.user3').val()+'&token='+$('.token3').val(),
+             success:(data)=>{
+                console.log('----delete:', data)
+             }
+           })
+      })
+      // 修改
+      $('.update').click(()=>{
+           $.ajax({
+             type:'put',
+             url:'/api/updateArticle',
+             data:{
+                user: $('.user4').val(),
+                title: $('.title4').val(),
+                token: $('.token4').val(),
+             },
+             success:(data)=>{
+                console.log('----update:', data)
+             }
+           })
+      })
+      // 图片上传
+      $('.fileupload').change(function(event) {
+          if ($('.fileupload').val().length) {
+              var fileName = $('.fileupload').val();
+              var extension = fileName.substring(fileName.lastIndexOf('.'), fileName.length).toLowerCase();
+              
+              if (extension == ".jpg" || extension == ".png") {
+                var data = new FormData();
+                data.append('fulAvatar', $('#fileToUpload')[0].files[0]);
+                $.ajax({
+                    url: '/api/uploadImg',
+                    type: 'POST',
+                    data: data,
+                    cache: false,
+                    contentType: false, //不可缺参数
+                    processData: false, //不可缺参数
+                    success: function(data) {
+                        console.log('-------upload img:', data);
+                        if (data.code == 200) {
+                          $('img').attr('src', data.result);
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                    }
+                });
+              }
+          }
+      });
+  </script>
+</html>

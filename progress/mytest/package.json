@@ -1,0 +1,22 @@
+{
+  "name": "myproject",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "ejs": "~2.5.6",
+    "express": "~4.16.3",
+    "formidable": "^1.1.1",
+    "jsonwebtoken": "^8.0.1",
+    "md5": "^2.2.1",
+    "mongodb": "^2.2.35",
+    "morgan": "~1.8.1",
+    "serve-favicon": "~2.4.2",
+    "silly-datetime": "^0.1.2"
+  }
+}
